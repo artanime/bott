@@ -6,9 +6,6 @@ import ProductModal from '../ProductModal/ProductModal'; // Импортируе
 const ProductItem = ({ product, className, onAdd }) => {
     const [isModalOpen, setModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
 
-    const onAddHandler = () => {
-        onAdd(product);
-    }
 
     const openModal = () => {
         setModalOpen(true);
