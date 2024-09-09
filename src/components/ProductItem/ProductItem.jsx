@@ -11,8 +11,9 @@ const ProductItem = ({ product, className, onAdd }) => {
         navigate(`/gallery/${product.id}`); // Перенаправляем на страницу галереи продукта
     };
 
-    const onAddHandler = () => {
-        onAdd(product);
+    const onAddHandler = (e) => {
+        e.stopPropagation(); // Останавливаем событие, чтобы не сработало открытие галереи
+        onAdd(product); // Добавляем товар в корзину
     };
 
     return (

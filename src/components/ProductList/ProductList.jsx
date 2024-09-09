@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
-import ProductModal from "../ProductModal/ProductModal"; // Импортируем модальное окно
+import ProductModal from "../ProductModal/ProductModal"; // Если есть модальное окно
 
 const products = [
     {
@@ -13,22 +13,8 @@ const products = [
     }
 ];
 
-const ProductList = () => {
-    const [addedItems, setAddedItems] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null); // Для хранения выбранного продукта (открытой галереи)
-
-    const onAdd = (product) => {
-        const alreadyAdded = addedItems.find(item => item.id === product.id);
-        let newItems = [];
-
-        if (alreadyAdded) {
-            newItems = addedItems.filter(item => item.id !== product.id);
-        } else {
-            newItems = [...addedItems, product];
-        }
-
-        setAddedItems(newItems);
-    };
+const ProductList = ({ addToBag }) => {
+    const [selectedProduct, setSelectedProduct] = useState(null); // Открытие галереи
 
     // Открываем галерею для выбранного продукта
     const openGallery = (product) => {
@@ -44,15 +30,15 @@ const ProductList = () => {
         <div className="list">
             {products.map(item => (
                 <ProductItem
-                    key={item.id} // Уникальный ключ для каждого элемента
+                    key={item.id}
                     product={item}
-                    onAdd={onAdd}
-                    onOpenGallery={openGallery} // Передаем функцию для открытия галереи
+                    onAdd={addToBag}
+                    onOpenGallery={() => openGallery(item)} // Передаем функцию открытия галереи
                     className="item"
                 />
             ))}
 
-            {/* Модальное окно с галереей, если продукт выбран */}
+            {/* Если выбран продукт, показываем модальное окно */}
             {selectedProduct && (
                 <ProductModal product={selectedProduct} onClose={closeGallery} />
             )}

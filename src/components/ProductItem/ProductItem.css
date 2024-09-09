@@ -1,4 +1,3 @@
-/* Основной стиль для карточки продукта */
 .product {
     display: flex;
     flex-direction: column;
@@ -9,22 +8,20 @@
     background-color: #fff;
     border-radius: 8px;
     width: 100%;
-    max-width: 300px; /* Ограничение ширины карточки */
-    margin-bottom: 20px; /* Отступ между карточками */
+    max-width: 300px;
+    margin-bottom: 20px;
 }
 
-/* Стиль для заголовка (title) */
 .title {
-    font-size: 20px; /* Размер шрифта */
-    font-weight: bold; /* Жирный шрифт */
+    font-size: 20px;
+    font-weight: bold;
     margin-bottom: 10px;
     font-family: 'Roboto', sans-serif;
 }
 
-/* Стиль для изображения */
 .img {
     width: 100%;
-    height: 200px; /* Высота изображения */
+    height: 200px;
     margin-bottom: 15px;
     overflow: hidden;
 }
@@ -32,33 +29,29 @@
 .img img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Изображение будет подогнано по размеру */
+    object-fit: cover;
     border-radius: 8px;
 }
 
-/* Стиль для описания */
 .description {
     font-size: 16px;
     color: #666;
     margin-bottom: 10px;
 }
 
-/* Блок для цены и кнопки */
 .bottom-section {
-    margin-top: auto; /* Отправляем блок вниз */
+    margin-top: auto;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Стиль для цены */
 .price {
     font-size: 16px;
     font-weight: bold;
 }
 
-/* Стиль для кнопки */
 .add-btn {
     padding: 10px 20px;
     border: none;
@@ -70,7 +63,6 @@
     transition: background-color 0.3s ease;
 }
 
-/* Ховер-эффект для кнопки */
 .add-btn:hover {
     background-color: #0056b3;
 }
