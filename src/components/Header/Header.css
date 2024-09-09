@@ -1,99 +1,36 @@
-/* Основной стиль для хедера */
+/* Фиксированный хэдер */
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 60px;
+    background-color: #333;
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Чтобы хэдер всегда был сверху */
 }
 
-/* Левая часть с логотипом и селектором языка */
-.header-left {
-    display: flex;
-    align-items: center;
+/* Отключение горизонтальной прокрутки */
+body, html {
+    overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
+    margin: 0;
+    padding: 0;
 }
 
-.logo {
-    height: 40px;
-    width: auto;
-    margin-right: 20px; /* Отступ между логотипом и селектором */
+/* Отступ для контента, чтобы он не перекрывался хэдером */
+.content {
+    margin-top: 60px; /* Отступ, чтобы не перекрывать контент хэдером */
 }
 
-/* Селектор языка */
-.language-selector {
-    background-color: #fff;
-    color: #333;
-    border: none;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-/* Правая часть с кнопкой закрытия */
-.header-right {
-    display: flex;
-    align-items: center;
-}
-
-.close-btn {
-    background-color: #ff4b4b;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.close-btn:hover {
-    background-color: #ff3333;
-}
-
-/* Адаптивные стили для мобильных устройств */
+/* Адаптивные стили */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
-        align-items: flex-start;
-        padding: 15px;
-    }
-
-    .header-left, .header-right {
-        width: 100%;
-        justify-content: space-between;
-        margin-top: 10px;
-    }
-
-    .close-btn {
-        font-size: 14px;
-        padding: 6px 10px;
-    }
-
-    .language-selector {
-        font-size: 12px;
-        padding: 4px;
-    }
-}
-
-/* Для очень маленьких экранов */
-@media (max-width: 480px) {
-    .header-left {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .logo {
-        height: 30px;
-    }
-
-    .close-btn {
-        font-size: 12px;
-        padding: 5px 10px;
-    }
-
-    .language-selector {
-        font-size: 10px;
+        padding: 10px;
     }
 }
