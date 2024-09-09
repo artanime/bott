@@ -1,32 +1,12 @@
 .gallery-page {
     padding: 20px;
-    padding-top: 80px; /* Добавляем отступ сверху для размещения кнопки под хедером */
-    text-align: left; /* Выровняем содержимое по левому краю */
-    position: relative;
-}
-
-.back-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-}
-
-/* Ховер эффект для кнопки "Назад" */
-.back-button:hover {
-    background-color: #0056b3;
+    text-align: center;
 }
 
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
-    margin-top: 40px; /* Отступ для содержимого */
 }
 
 .gallery-item {
@@ -34,7 +14,7 @@
     border-radius: 8px;
 }
 
-.gallery-image {
+.gallery-image, .gallery-video {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -42,6 +22,71 @@
     transition: transform 0.3s ease;
 }
 
-.gallery-image:hover {
+.gallery-image:hover, .gallery-video:hover {
     transform: scale(1.1);
+}
+
+/* Полноэкранный режим */
+.fullscreen-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.fullscreen-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fullscreen-image, .fullscreen-video {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+.prev-btn, .next-btn {
+    background-color: transparent;
+    color: white;
+    font-size: 36px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+.fullscreen-backdrop:hover .prev-btn,
+.fullscreen-backdrop:hover .next-btn {
+    opacity: 1;
 }
