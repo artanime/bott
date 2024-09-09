@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './ProductModal.css';
 
 const ProductModal = ({ product, onClose }) => {
@@ -7,17 +7,18 @@ const ProductModal = ({ product, onClose }) => {
 
     const images = product.images || [product.image]; // Массив с фотографиями продукта
 
-    const prevImage = () => {
+    // Используем useCallback, чтобы сохранить функции неизменными между рендерами
+    const prevImage = useCallback(() => {
         setCurrentImageIndex((prevIndex) =>
             prevIndex === 0 ? images.length - 1 : prevIndex - 1
         );
-    };
+    }, [images.length]);
 
-    const nextImage = () => {
+    const nextImage = useCallback(() => {
         setCurrentImageIndex((prevIndex) =>
             prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
-    };
+    }, [images.length]);
 
     // Обработчик касания на моб. устройствах
     const handleTouchStart = (event) => {
@@ -58,7 +59,7 @@ const ProductModal = ({ product, onClose }) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [nextImage, prevImage]); // Добавляем зависимости
 
     return (
         <div className="modal-backdrop" onClick={handleBackdropClick}>
