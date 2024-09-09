@@ -19,7 +19,7 @@ const ProductModal = ({ product, onClose }) => {
     };
 
     const handleBackdropClick = (event) => {
-        // Закрытие галереи при нажатии на фон (если клик был на backdrop, а не на модальное окно)
+        // Закрытие галереи при нажатии на фон (если клик был на backdrop)
         if (event.target.className === 'modal-backdrop') {
             onClose();
         }
