@@ -1,96 +1,127 @@
-/* Общие стили для кнопок */
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-/* Стили для кнопки просмотра (View) */
-.view-btn {
+/* Общий стиль для компонента продукта */
+.add-btn {
     padding: 10px 20px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 6px;
-    background-color: #28a745; /* Зеленый фон */
+    margin-left: auto;
+    border: none; /* Убрать границу */
+    border-radius: 6px; /* Закругленные углы */
+    background-color: #007bff; /* Фоновый цвет */
     color: #fff; /* Цвет текста */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 16px; /* Размер шрифта */
+    cursor: pointer; /* Курсор указатель */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета */
 }
 
-.view-btn:hover {
-    background-color: #218838; /* Более темный зеленый при наведении */
+
+/* Ховер эффект для кнопки */
+.add-btn:hover {
+    background-color: #004fea; /* Темный фон при наведении */
 }
 
-/* Стили для корзины в правом нижнем углу */
-.cart-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background-image: url('http://localhost:3000/Photo/bag.png');
-    background-size: cover;
-    cursor: pointer;
-    z-index: 1000;
+.product {
+    display: flex;
+    width: 430px;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #ccc;
+    /*border-radius: 10px;*/
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
-/* Адаптивность для корзины */
-@media (max-width: 768px) {
-    .cart-icon {
-        width: 40px; /* Уменьшение размера на планшетах */
-        height: 40px;
-        bottom: 15px;
-        right: 15px;
-    }
-}
 
-@media (max-width: 480px) {
-    .cart-icon {
-        width: 30px; /* Ещё меньше на смартфонах */
-        height: 30px;
-        bottom: 10px;
-        right: 10px;
-    }
-}
-
-/* Стили для изображения продукта в карточке */
 .img {
     width: 100%;
-    height: 250px; /* Фиксированная высота для всех изображений */
-    overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 250px; /* Высота изображения */
+    background-size: cover; /* Кадрирование изображения */
+    background-position: center; /* Центрирование изображения */
 }
+/*.img {*/
+/*    width: 100%;*/
+/*    height: 200px; !* Высота изображения *!*/
+/*    overflow: hidden;*/
+/*    border-radius: 10px;*/
+/*    margin-bottom: 15px;*/
+/*}*/
 
 .img img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Обеспечивает сохранение пропорций изображения */
+    object-fit: cover;
+    /*border-radius: 10px;*/
 }
 
-/* Адаптивные настройки */
-@media (max-width: 768px) {
-    .view-btn {
-        font-size: 14px; /* Уменьшение размера шрифта на планшетах */
-        padding: 8px 16px;
-    }
-
-    .img {
-        height: 200px; /* Уменьшение высоты изображения на планшетах */
-    }
+/* Стиль для заголовка */
+.title {
+    font-size: 20px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    margin-bottom: 10px;
+    padding-left: 4px;
+    font-family: 'Roboto', sans-serif;
 }
 
-@media (max-width: 480px) {
-    .view-btn {
-        font-size: 12px; /* Ещё меньше на смартфонах */
-        padding: 6px 12px;
-    }
+/* Стиль для описания */
+.description {
+    font-size: 21px; /* Размер шрифта */
+    color: #666; /* Цвет текста */
+    padding-left: 5px;
 
-    .img {
-        height: 150px; /* Ещё меньше на смартфонах */
-    }
+
 }
+
+/* Стиль для цены */
+
+
+.button_price {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+
+}
+.price {
+    display: flex;
+    font-size: 25px; /* Размер шрифта */
+    padding-top: 10px;
+    justify-content: flex-start;
+    font-family: 'Roboto', sans-serif;
+    font-weight: revert;
+
+}
+
+.add_rent_car {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.price span b {
+    color: #555555; /* Цвет выделенной цены */
+}
+
+
+
+
+
+
+
+
+/*.product {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    border: 1px solid var(--tg-theme-button-color);*/
+/*    padding: 15px;*/
+/*    width: 170px;*/
+/*}*/
+/*.img {*/
+/*    width: 100%;*/
+/*    background: lightgray;*/
+/*    height: 100px;*/
+/*    margin: 0 auto;*/
+/*    background: var(--tg-theme-button-color);*/
+/*}*/
+/*.description {*/
+/*    font-size: 0.8em;*/
+/*}*/
+/*.add-btn {*/
+/*    width: 100%;*/
+/*}*/

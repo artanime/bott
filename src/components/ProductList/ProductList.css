@@ -1,121 +1,79 @@
-/* Стили для контейнера с продуктами */
 .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Гибкая сетка, чтобы содержать 3 продукта в ряду */
-    gap: 20px; /* Пробел между элементами сетки */
-    padding: 20px; /* Отступы вокруг сетки */
-    box-sizing: border-box; /* Учитывать отступы и границы в общей ширине */
+
+    max-width: 100%;
+    padding: 0;
 }
 
-/* Стили для компонента продукта */
-.product {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border: 1px solid #ccc;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    border-radius: 10px; /* Закругленные углы для лучшего визуального восприятия */
-    overflow: hidden; /* Обрезает содержимое, выходящее за границы контейнера */
-}
 
-/* Стили для изображения продукта */
-.img {
+.banner-slider {
     width: 100%;
-    height: 200px; /* Фиксированная высота для изображений */
-    overflow: hidden; /* Обрезает изображение, если оно больше контейнера */
-    border-radius: 8px; /* Закругленные углы изображения */
-    position: relative; /* Устанавливаем относительно родителя для правильного позиционирования */
+    margin-bottom: 0;
+    position: relative;
+
+
 }
 
-/* Стили для изображения внутри блока */
-.img img {
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
+    overflow: hidden;
+
+     /* Ограничение максимальной ширины */
+}
+
+.banner-video {
+
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Обеспечивает сохранение пропорций изображения */
-    display: block; /* Убирает пробел под изображением */
+    object-fit: cover;
 }
 
-/* Стиль для заголовка */
-.title {
-    font-size: 18px; /* Размер шрифта заголовка */
-    font-weight: bold; /* Жирный шрифт */
-    margin-bottom: 10px;
-    padding-left: 4px;
-    font-family: 'Roboto', sans-serif;
-}
 
-/* Стиль для описания */
-.description {
-    font-size: 14px; /* Размер шрифта описания */
-    color: #666; /* Цвет текста */
-    padding-left: 5px;
-}
-
-/* Стиль для цены и кнопки */
-.button_price {
+.list {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-}
-
-.price {
-    display: flex;
-    font-size: 18px; /* Размер шрифта цены */
-    padding-top: 10px;
+    flex-wrap: wrap;
     justify-content: flex-start;
-    font-family: 'Roboto', sans-serif;
-    font-weight: revert;
+    width: 100%;
+    height: 100%;
 }
 
-.add_rent_car {
-    display: flex;
-    justify-content: flex-end;
+.item {
+
+    margin-bottom: 10px;
 }
 
-.price span b {
-    color: #555555; /* Цвет выделенной цены */
+
+
+
+
+
+
+/* Основной контейнер страницы */
+.product-list {
+    /*overflow-x: hidden; !* Отключаем горизонтальный скроллинг *!*/
+    box-sizing: border-box; /* Учитываем бордеры и паддинги в ширине */
+    padding-bottom: 63px;
 }
 
-/* Медиа-запросы для адаптивности */
-
-/* Для экранов меньше 768px */
-@media (max-width: 768px) {
-    .product-list {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 2 продукта в ряду на более узких экранах */
-    }
-
-    .title {
-        font-size: 16px; /* Уменьшение размера шрифта заголовка */
-    }
-
-    .description {
-        font-size: 12px; /* Уменьшение размера шрифта описания */
-    }
-
-    .price {
-        font-size: 16px; /* Уменьшение размера шрифта цены */
-    }
+/* Баннер и другие медиа элементы */
+.banner-slider,
+.video-container,
+.banner-video {
+    max-width: 100%; /* Ограничиваем ширину */
+    overflow: hidden; /* Отключаем переполнение */
+    box-sizing: border-box;
 }
 
-/* Для экранов меньше 480px */
-@media (max-width: 480px) {
-    .product-list {
-        grid-template-columns: 1fr; /* 1 продукт в ряду на самых узких экранах */
-    }
-
-    .product {
-        padding: 5px; /* Уменьшение отступов внутри компонента */
-    }
-
-    .img {
-        height: 150px; /* Уменьшение высоты изображения */
-    }
-
-    .add-btn {
-        font-size: 14px; /* Уменьшение размера шрифта на кнопке */
-        padding: 8px 16px; /* Уменьшение отступов на кнопке */
-    }
+/* Убедитесь, что все элементы, которые могут выходить за пределы экрана, ограничены по ширине */
+.list,
+.item,
+.nav-bar,
+.nav-button {
+    max-width: 100%;
+    box-sizing: border-box;
 }
