@@ -12,7 +12,42 @@
     align-items: center;
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Чтобы хэдер всегда был сверху */
+    z-index: 1000; /* Хэдер всегда сверху */
+    box-sizing: border-box; /* Включаем padding и border в размеры */
+    overflow: hidden; /* Предотвращение выхода элементов за границы */
+}
+
+/* Логотип */
+.logo {
+    height: 40px; /* Фиксированная высота логотипа */
+    width: auto; /* Сохранение пропорций логотипа */
+    max-width: 150px; /* Ограничение максимальной ширины */
+}
+
+/* Селектор языка */
+.language-selector {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Кнопка закрытия */
+.close-btn {
+    background-color: #ff4b4b;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap; /* Предотвращение переноса текста кнопки */
+}
+
+.close-btn:hover {
+    background-color: #ff3333;
 }
 
 /* Отключение горизонтальной прокрутки */
@@ -20,6 +55,7 @@ body, html {
     overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Гарантируем корректные размеры */
 }
 
 /* Отступ для контента, чтобы он не перекрывался хэдером */
@@ -27,10 +63,37 @@ body, html {
     margin-top: 60px; /* Отступ, чтобы не перекрывать контент хэдером */
 }
 
-/* Адаптивные стили */
+/* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
     .header {
-        flex-direction: column;
+        flex-direction: column; /* Размещение элементов хедера в колонку на маленьких экранах */
         padding: 10px;
+    }
+
+    .close-btn {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .language-selector {
+        font-size: 12px;
+        padding: 4px;
+    }
+}
+
+/* Адаптация для очень маленьких экранов */
+@media (max-width: 480px) {
+    .logo {
+        height: 30px; /* Уменьшение размера логотипа на маленьких экранах */
+        max-width: 100px; /* Ограничение ширины */
+    }
+
+    .close-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .language-selector {
+        font-size: 10px;
     }
 }
