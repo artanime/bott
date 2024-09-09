@@ -3,6 +3,14 @@
     text-align: center;
 }
 
+/* Заголовки */
+h2 {
+    margin: 20px 0 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Галерея изображений */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -14,7 +22,7 @@
     border-radius: 8px;
 }
 
-.gallery-image, .gallery-video {
+.gallery-image {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -22,8 +30,27 @@
     transition: transform 0.3s ease;
 }
 
-.gallery-image:hover, .gallery-video:hover {
+.gallery-image:hover {
     transform: scale(1.1);
+}
+
+/* Галерея видео */
+.media-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.media-item {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-video {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    object-fit: cover;
 }
 
 /* Полноэкранный режим */
@@ -89,4 +116,221 @@
 .fullscreen-backdrop:hover .prev-btn,
 .fullscreen-backdrop:hover .next-btn {
     opacity: 1;
+}
+
+/* Респонсивные стили для мобильных устройств (iPhone, Android) */
+@media (max-width: 768px) {
+    .gallery-page {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .gallery-grid, .media-gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Уменьшаем количество колонок */
+        gap: 10px; /* Уменьшаем отступы между элементами */
+    }
+
+    .fullscreen-content {
+        width: 100%;
+        max-width: 100%; /* На мобильных экранах занимаем всю ширину */
+    }
+
+    .fullscreen-image, .fullscreen-video {
+        width: 100%;
+        max-height: 80vh; /* Уменьшаем максимальную высоту для мобильных устройств */
+    }
+
+    .close-btn {
+        font-size: 20px; /* Уменьшаем размер кнопки закрытия */
+    }
+
+    .prev-btn, .next-btn {
+        font-size: 30px; /* Уменьшаем размер кнопок навигации */
+    }
+}
+
+/* Дополнительные стили для небольших экранов (iPhone SE, старые устройства) */
+@media (max-width: 480px) {
+    h2 {
+        font-size: 18px;
+    }
+
+    .gallery-grid, .media-gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Ещё меньше колонок для маленьких экранов */
+        gap: 8px; /* Ещё меньшие отступы */
+    }
+
+    .fullscreen-image, .fullscreen-video {
+        max-height: 70vh; /* Ещё меньшая высота для совсем маленьких экранов */
+    }
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    opacity: 0.8;
+}
+
+    .close-btn {
+        font-size: 18px; /* Уменьшаем размер кнопки закрытия */
+    }
+
+    .prev-btn, .next-btn {
+        font-size: 28px; /* Ещё меньше кнопки навигации */
+    }
+}
+/* Стиль для кнопки "Назад" */
+.back-button {
+    position: absolute;
+    top: 70px; /* Под хедером */
+    left: 20px; /* Расположена слева */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3; /* Темнее при наведении */
+}
+
+@media (max-width: 768px) {
+    .back-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+.gallery-page {
+    padding: 20px;
+    text-align: center;
+    padding-bottom: 100px; /* Отступ снизу для кнопок */
+}
+
+.gallery-grid, .media-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+/* Изображения в галерее */
+.gallery-item, .media-item {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-image, .gallery-video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover, .gallery-video:hover {
+    transform: scale(1.05);
+}
+
+/* Полноэкранный режим */
+.fullscreen-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Адаптивные стили для кнопок */
+@media (max-width: 768px) {
+    .gallery-page {
+        padding-bottom: 120px; /* Увеличиваем отступ снизу для мобильных устройств */
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-page {
+        padding-bottom: 140px; /* Ещё больший отступ для маленьких экранов */
+    }
+}
+.gallery-page {
+    padding: 20px;
+    text-align: center;
+    padding-bottom: 100px; /* Отступ снизу для кнопок */
+}
+
+.gallery-grid, .media-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.gallery-item, .media-item {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Стиль для изображений и видео */
+.gallery-image, .gallery-video {
+    width: 100%;
+    height: 250px; /* Фиксированная высота для изображений и видео */
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover, .gallery-video:hover {
+    transform: scale(1.05);
+}
+
+/* Полноэкранный режим */
+.fullscreen-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .gallery-page {
+        padding-bottom: 120px;
+    }
+
+    .gallery-image, .gallery-video {
+        height: 200px; /* Уменьшение высоты на мобильных устройствах */
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-page {
+        padding-bottom: 140px;
+    }
+
+    .gallery-image, .gallery-video {
+        height: 180px; /* Ещё меньше для маленьких экранов */
+    }
 }

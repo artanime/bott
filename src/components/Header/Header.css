@@ -1,4 +1,4 @@
-/* Основные стили хедера */
+/* Основные стили для хедера */
 .header {
     width: 100%;
     height: 60px;
@@ -6,15 +6,27 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    background-color: var(--header-bg-color); /* Цвет фона хедера через переменную */
-    color: var(--header-text-color); /* Цвет текста хедера через переменную */
+    background-color: var(--header-bg-color); /* Цвет фона, меняется в зависимости от темы */
+    color: var(--header-text-color); /* Цвет текста, меняется в зависимости от темы */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Логотип */
+/* Стили для левой части хедера (логотип) */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     height: 40px;
     width: auto;
+}
+
+/* Стили для правой части хедера (переключатель темы) */
+.header-right {
+    display: flex;
+    align-items: center;
 }
 
 /* Кнопка для переключения темы */
@@ -32,9 +44,11 @@
     opacity: 0.8;
 }
 
+/* Темы */
+
 /* Светлая тема */
 body.light-mode {
-    --header-bg-color: #b3e5fc; /* Светло-синий цвет для светлой темы */
+    --header-bg-color: #b3e5fc; /* Светло-синий фон для светлой темы */
     --header-text-color: #333;   /* Тёмный текст для светлой темы */
     --body-bg-color: #f9f9f9;   /* Светлый фон страницы */
     --body-text-color: #333;     /* Тёмный текст для страницы */
@@ -44,7 +58,7 @@ body.light-mode {
 
 /* Тёмная тема */
 body.dark-mode {
-    --header-bg-color: #1565c0; /* Тёмно-синий цвет для тёмной темы */
+    --header-bg-color: #1565c0; /* Тёмно-синий фон для тёмной темы */
     --header-text-color: #f0f0f0; /* Светлый текст для тёмной темы */
     --body-bg-color: #181818;   /* Тёмный фон страницы */
     --body-text-color: #f0f0f0; /* Светлый текст для страницы */
@@ -52,8 +66,34 @@ body.dark-mode {
     color: var(--body-text-color);
 }
 
-/* Дополнительные стили для контента */
-.content {
-    padding: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+/* Адаптивные стили для планшетов и мобильных устройств */
+@media (max-width: 768px) {
+    .header {
+        padding: 0 10px;
+        height: 50px; /* Уменьшенная высота для мобильных устройств */
+    }
+
+    .logo {
+        height: 35px; /* Уменьшение логотипа на мобильных устройствах */
+    }
+
+    .theme-switcher {
+        padding: 8px 16px; /* Уменьшение кнопки */
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        height: 45px; /* Ещё меньше для маленьких экранов */
+    }
+
+    .logo {
+        height: 30px; /* Логотип будет ещё меньше */
+    }
+
+    .theme-switcher {
+        padding: 6px 12px; /* Ещё меньше отступы на маленьких экранах */
+        font-size: 12px; /* Уменьшение размера шрифта кнопки */
+    }
 }

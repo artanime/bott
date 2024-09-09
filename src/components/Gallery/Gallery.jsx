@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Используем useNavigate для кнопки "Назад"
 import './Gallery.css';
 
 const products = [
@@ -9,21 +9,22 @@ const products = [
             { type: 'image', src: '/images/6.jpg' },
             { type: 'image', src: '/images/5.jpg' },
             { type: 'image', src: '/images/4.1.jpg' },
-            { type: 'video', src: '/images/titan.mp4' } // Пример видео
+            { type: 'video', src: '/videos/sample.mp4', poster: '/images/video-preview.jpg' }
         ]
     },
 ];
 
 const Gallery = () => {
     const { id } = useParams();
+    const navigate = useNavigate(); // Хук для навигации назад
     const product = products.find(p => p.id === id);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
     const [startX, setStartX] = useState(null);
 
-    // Вызов хуков вне условий
+    // Функции для листания медиа
     const prevMedia = useCallback(() => {
-        if (product) {
+        if (product?.media) {
             setCurrentMediaIndex((prevIndex) =>
                 prevIndex === 0 ? product.media.length - 1 : prevIndex - 1
             );
@@ -31,7 +32,7 @@ const Gallery = () => {
     }, [product]);
 
     const nextMedia = useCallback(() => {
-        if (product) {
+        if (product?.media) {
             setCurrentMediaIndex((prevIndex) =>
                 prevIndex === product.media.length - 1 ? 0 : prevIndex + 1
             );
@@ -78,6 +79,10 @@ const Gallery = () => {
         }
     };
 
+    // Разделяем изображения и видео для показа в разных контейнерах
+    const images = product?.media.filter(item => item.type === 'image');
+    const videos = product?.media.filter(item => item.type === 'video');
+
     // Если продукт не найден, возвращаем сообщение
     if (!product) {
         return <div>Product not found</div>;
@@ -85,29 +90,45 @@ const Gallery = () => {
 
     return (
         <div className="gallery-page">
-            <h1>{product.title} Gallery</h1>
+            {/* Кнопка "Назад" */}
+            <button className="back-button" onClick={() => navigate(-1)}>
+                ← Назад
+            </button>
+
+            <h1>{product.title}</h1>
+
+            {/* Галерея изображений */}
+            <h2>Gallery</h2>
             <div className="gallery-grid">
-                {product.media.map((item, index) => (
+                {images.map((image, index) => (
                     <div key={index} className="gallery-item">
-                        {item.type === 'image' ? (
-                            <img
-                                src={item.src}
-                                alt={`Gallery media ${index + 1}`}
-                                className="gallery-image"
-                                onClick={() => openFullscreen(index)}
-                            />
-                        ) : (
-                            <video
-                                src={item.src}
-                                className="gallery-video"
-                                onClick={() => openFullscreen(index)}
-                                controls
-                            />
-                        )}
+                        <img
+                            src={image.src}
+                            alt={`View of ${product.title}`}
+                            className="gallery-image"
+                            onClick={() => openFullscreen(index)}
+                        />
                     </div>
                 ))}
             </div>
 
+            {/* Галерея видео */}
+            <h2>Media Gallery</h2>
+            <div className="media-gallery-grid">
+                {videos.map((video, index) => (
+                    <div key={index + images.length} className="media-item">
+                        <video
+                            src={video.src}
+                            className="gallery-video"
+                            poster={video.poster} /* Добавляем постер для видео */
+                            controls
+                            onClick={() => openFullscreen(index + images.length)}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            {/* Полноэкранный режим для изображений и видео */}
             {isFullscreen && (
                 <div
                     className="fullscreen-backdrop"
@@ -123,7 +144,7 @@ const Gallery = () => {
                         {product.media[currentMediaIndex].type === 'image' ? (
                             <img
                                 src={product.media[currentMediaIndex].src}
-                                alt={`Fullscreen ${currentMediaIndex + 1}`}
+                                alt={`Fullscreen view of ${product.title}`}
                                 className="fullscreen-image"
                             />
                         ) : (
