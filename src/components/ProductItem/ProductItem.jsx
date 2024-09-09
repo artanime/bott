@@ -4,9 +4,6 @@ import './ProductItem.css';
 
 const ProductItem = ({ product, className, onAdd, onOpenGallery }) => { // Добавляем onOpenGallery пропс
 
-    const onAddHandler = () => {
-        onAdd(product);
-    };
 
     // Функция для открытия галереи
     const openGalleryHandler = () => {
