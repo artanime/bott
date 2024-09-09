@@ -1,30 +1,32 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import './ProductModal.css';
 
 const ProductModal = ({ product, onClose }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [startX, setStartX] = useState(null); // Начальная позиция касания по оси X
+    const [startX, setStartX] = useState(null); // Для отслеживания начальной точки свайпа
 
     const images = product.images || [product.image]; // Массив с фотографиями продукта
 
-    // Используем useCallback, чтобы сохранить функции неизменными между рендерами
+    // Функция для перехода к предыдущему изображению
     const prevImage = useCallback(() => {
         setCurrentImageIndex((prevIndex) =>
             prevIndex === 0 ? images.length - 1 : prevIndex - 1
         );
     }, [images.length]);
 
+    // Функция для перехода к следующему изображению
     const nextImage = useCallback(() => {
         setCurrentImageIndex((prevIndex) =>
             prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
     }, [images.length]);
 
-    // Обработчик касания на моб. устройствах
+    // Обработка начала касания для свайпа
     const handleTouchStart = (event) => {
         setStartX(event.touches[0].clientX);
     };
 
+    // Обработка движения касания для свайпа
     const handleTouchMove = (event) => {
         if (!startX) return;
 
@@ -32,47 +34,49 @@ const ProductModal = ({ product, onClose }) => {
         const diffX = startX - currentX;
 
         if (diffX > 50) {
-            nextImage(); // Свайп влево
+            nextImage(); // Свайп влево (переход к следующему изображению)
             setStartX(null); // Сброс после свайпа
         } else if (diffX < -50) {
-            prevImage(); // Свайп вправо
+            prevImage(); // Свайп вправо (переход к предыдущему изображению)
             setStartX(null); // Сброс после свайпа
         }
     };
 
+    // Обработка кликов на левую или правую сторону изображения
+    const handleImageClick = (event) => {
+        const imageWidth = event.target.clientWidth;
+        const clickX = event.clientX;
+
+        if (clickX < imageWidth / 2) {
+            prevImage(); // Клик на левой части изображения
+        } else {
+            nextImage(); // Клик на правой части изображения
+        }
+    };
+
+    // Обработка клика на задний фон для закрытия галереи
     const handleBackdropClick = (event) => {
         if (event.target.className === 'modal-backdrop') {
             onClose();
         }
     };
 
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key === 'ArrowRight') {
-                nextImage();
-            } else if (event.key === 'ArrowLeft') {
-                prevImage();
-            }
-        };
-
-        document.addEventListener('keydown', handleKeyDown);
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [nextImage, prevImage]); // Добавляем зависимости
-
     return (
         <div className="modal-backdrop" onClick={handleBackdropClick}>
             <div
                 className="modal-content"
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
+                onTouchStart={handleTouchStart} // Начало свайпа
+                onTouchMove={handleTouchMove}  // Движение свайпа
             >
                 <button className="close-btn" onClick={onClose}>Закрыть</button>
                 <div className="gallery">
-                    <button className="gallery-btn" onClick={prevImage}>◀</button>
-                    <img src={images[currentImageIndex]} alt={product.title} className="gallery-img" />
-                    <button className="gallery-btn" onClick={nextImage}>▶</button>
+                    {/* Обработчик клика по изображению */}
+                    <img
+                        src={images[currentImageIndex]}
+                        alt={product.title}
+                        className="gallery-img"
+                        onClick={handleImageClick} // Клик по левой или правой части изображения
+                    />
                 </div>
                 <div className="modal-title">{product.title}</div>
                 <div className="modal-description">{product.description}</div>
