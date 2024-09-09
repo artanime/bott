@@ -4,7 +4,14 @@ import ProductItem from "../ProductItem/ProductItem";
 import ProductModal from "../ProductModal/ProductModal"; // Импортируем модальное окно
 
 const products = [
-    { id: '1', title: 'Attack on Titan', price: 1500, image: 'Photo/attack.jpg', images: ['Photo/attack.jpg', 'Photo/6.jpg', 'Photo/5.jpg', 'Photo/4.1.jpg'] }
+    {
+        id: '1',
+        title: 'Attack on Titan',
+        price: 1500,
+        description: 'Синего цвета, прямые',
+        image: 'Photo/attack.jpg',
+        media: ['Photo/attack.jpg', 'Photo/6.jpg', 'Photo/titan.mp4'] // Вставляем ссылки на видео и изображения
+    }
 ];
 
 const ProductList = () => {

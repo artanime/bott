@@ -2,23 +2,23 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './ProductModal.css';
 
 const ProductModal = ({ product, onClose }) => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
     const [startX, setStartX] = useState(null); // Начальная позиция касания по оси X
 
-    const images = product.images || [product.image]; // Массив с фотографиями продукта
+    const media = product.media || [product.image]; // Массив с медиа (фото и видео)
 
     // Используем useCallback, чтобы сохранить функции неизменными между рендерами
-    const prevImage = useCallback(() => {
-        setCurrentImageIndex((prevIndex) =>
-            prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    const prevMedia = useCallback(() => {
+        setCurrentMediaIndex((prevIndex) =>
+            prevIndex === 0 ? media.length - 1 : prevIndex - 1
         );
-    }, [images.length]);
+    }, [media.length]);
 
-    const nextImage = useCallback(() => {
-        setCurrentImageIndex((prevIndex) =>
-            prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    const nextMedia = useCallback(() => {
+        setCurrentMediaIndex((prevIndex) =>
+            prevIndex === media.length - 1 ? 0 : prevIndex + 1
         );
-    }, [images.length]);
+    }, [media.length]);
 
     // Обработчик касания на моб. устройствах
     const handleTouchStart = (event) => {
@@ -32,11 +32,23 @@ const ProductModal = ({ product, onClose }) => {
         const diffX = startX - currentX;
 
         if (diffX > 50) {
-            nextImage(); // Свайп влево
+            nextMedia(); // Свайп влево
             setStartX(null); // Сброс после свайпа
         } else if (diffX < -50) {
-            prevImage(); // Свайп вправо
+            prevMedia(); // Свайп вправо
             setStartX(null); // Сброс после свайпа
+        }
+    };
+
+    // Обработчик кликов на изображение для перелистывания
+    const handleImageClick = (event) => {
+        const imageWidth = event.target.clientWidth;
+        const clickX = event.clientX;
+
+        if (clickX < imageWidth / 2) {
+            prevMedia(); // Клик на левой половине изображения — листаем влево
+        } else {
+            nextMedia(); // Клик на правой половине изображения — листаем вправо
         }
     };
 
@@ -49,9 +61,9 @@ const ProductModal = ({ product, onClose }) => {
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'ArrowRight') {
-                nextImage();
+                nextMedia();
             } else if (event.key === 'ArrowLeft') {
-                prevImage();
+                prevMedia();
             }
         };
 
@@ -59,7 +71,7 @@ const ProductModal = ({ product, onClose }) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [nextImage, prevImage]); // Добавляем зависимости
+    }, [nextMedia, prevMedia]);
 
     return (
         <div className="modal-backdrop" onClick={handleBackdropClick}>
@@ -70,9 +82,24 @@ const ProductModal = ({ product, onClose }) => {
             >
                 <button className="close-btn" onClick={onClose}>Закрыть</button>
                 <div className="gallery">
-                    <button className="gallery-btn" onClick={prevImage}>◀</button>
-                    <img src={images[currentImageIndex]} alt={product.title} className="gallery-img" />
-                    <button className="gallery-btn" onClick={nextImage}>▶</button>
+                    <button className="gallery-btn" onClick={prevMedia}>◀</button>
+
+                    {/* Определяем, является ли текущий элемент видео или изображением */}
+                    {media[currentMediaIndex].includes('.mp4') ? (
+                        <video controls className="gallery-media">
+                            <source src={media[currentMediaIndex]} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    ) : (
+                        <img
+                            src={media[currentMediaIndex]}
+                            alt={product.title}
+                            className="gallery-media"
+                            onClick={handleImageClick} // Обработка клика по изображению
+                        />
+                    )}
+
+                    <button className="gallery-btn" onClick={nextMedia}>▶</button>
                 </div>
                 <div className="modal-title">{product.title}</div>
                 <div className="modal-description">{product.description}</div>

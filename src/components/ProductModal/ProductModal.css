@@ -31,62 +31,34 @@
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
 }
 
-.close-btn:hover {
-    background-color: #ff3333;
-}
-
-.gallery {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.gallery-img {
+.gallery-media {
     max-width: 100%;
     height: auto;
-}
-
-.gallery-btn {
-    background: none;
-    border: none;
-    font-size: 30px;
-    cursor: pointer;
-    margin: 0 10px;
+    border-radius: 8px;
 }
 
 .modal-title {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-top: 15px;
 }
 
 .modal-description {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .modal-price {
     font-size: 20px;
-    font-weight: bold;
+    margin-top: 15px;
 }
 
-/* Адаптивные стили для маленьких экранов */
-@media (max-width: 768px) {
-    .modal-content {
-        max-width: 90%;
-        padding: 15px;
-    }
-
-    .gallery-btn {
-        font-size: 24px;
-    }
-
-    .close-btn {
-        font-size: 14px;
-        padding: 6px 10px;
-    }
+.gallery-btn {
+    cursor: pointer;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: #333;
 }
