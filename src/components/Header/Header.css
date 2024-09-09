@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px;
+    height: 60px; /* Высота хедера */
     background-color: #333;
     color: #fff;
     display: flex;
@@ -12,88 +12,56 @@
     align-items: center;
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Хэдер всегда сверху */
-    box-sizing: border-box; /* Включаем padding и border в размеры */
-    overflow: hidden; /* Предотвращение выхода элементов за границы */
+    z-index: 1000;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 /* Логотип */
 .logo {
     height: 40px; /* Фиксированная высота логотипа */
-    width: auto; /* Сохранение пропорций логотипа */
-    max-width: 150px; /* Ограничение максимальной ширины */
+    width: auto; /* Автоматическая ширина для сохранения пропорций */
 }
 
-/* Селектор языка */
-.language-selector {
-    background-color: #fff;
-    color: #333;
-    border: none;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 14px;
+/* Основное содержимое страницы в контейнере */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 80px; /* Отступ для основного контента */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Кнопка закрытия */
-.close-btn {
-    background-color: #ff4b4b;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    white-space: nowrap; /* Предотвращение переноса текста кнопки */
+/* Карточка с фотографией */
+.card {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 8px;
 }
 
-.close-btn:hover {
-    background-color: #ff3333;
-}
-
-/* Отключение горизонтальной прокрутки */
-body, html {
-    overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Гарантируем корректные размеры */
-}
-
-/* Отступ для контента, чтобы он не перекрывался хэдером */
-.content {
-    margin-top: 60px; /* Отступ, чтобы не перекрывать контент хэдером */
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
     .header {
-        flex-direction: column; /* Размещение элементов хедера в колонку на маленьких экранах */
+        flex-direction: column;
         padding: 10px;
     }
 
-    .close-btn {
-        font-size: 14px;
-        padding: 6px 10px;
+    .container {
+        margin-top: 100px;
+        padding: 15px;
     }
 
-    .language-selector {
-        font-size: 12px;
-        padding: 4px;
-    }
-}
-
-/* Адаптация для очень маленьких экранов */
-@media (max-width: 480px) {
     .logo {
-        height: 30px; /* Уменьшение размера логотипа на маленьких экранах */
-        max-width: 100px; /* Ограничение ширины */
-    }
-
-    .close-btn {
-        font-size: 12px;
-        padding: 5px 10px;
-    }
-
-    .language-selector {
-        font-size: 10px;
+        height: 30px; /* Уменьшение размера логотипа на мобильных устройствах */
     }
 }

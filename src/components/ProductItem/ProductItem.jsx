@@ -1,35 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from "../Button/Button";
 import './ProductItem.css';
-import ProductModal from '../ProductModal/ProductModal'; // Импортируем модальное окно с галереей
 
-const ProductItem = ({ product, className, onAdd }) => {
-    const [isModalOpen, setModalOpen] = useState(false); // Состояние для открытия/закрытия галереи
+const ProductItem = ({ product, className, onAdd, onOpenGallery }) => { // Добавляем onOpenGallery пропс
 
-    const openModal = () => {
-        setModalOpen(true);
+    const onAddHandler = () => {
+        onAdd(product);
     };
 
-    const closeModal = () => {
-        setModalOpen(false);
+    // Функция для открытия галереи
+    const openGalleryHandler = () => {
+        onOpenGallery(product); // Открываем галерею для текущего продукта
     };
 
     return (
         <div className={`product ${className}`}>
-            <div className="img" onClick={openModal}> {/* Добавляем обработчик клика на изображение */}
+            <div className="title">{product.title}</div> {/* Заголовок */}
+            <div className="img" onClick={openGalleryHandler}> {/* Открываем галерею по клику на изображение */}
                 <img src={product.image} alt={product.title} />
             </div>
-            <div className="title">{product.title}</div>
             <div className="description">{product.description}</div>
-            <div className="price">
-                <span>Стоимость: <b>{product.price}₽</b></span>
+            <div className="bottom-section">
+                <div className="price">
+                    <span>Price: <b>${product.price}</b></span> {/* Цена */}
+                </div>
+                <Button className="add-btn" onClick={openGalleryHandler}> {/* Открываем галерею по клику на кнопку */}
+                    Look
+                </Button>
             </div>
-            <Button className="add-btn" onClick={openModal}>
-                Look
-            </Button>
-
-            {/* Модальное окно с галереей фотографий */}
-            {isModalOpen && <ProductModal product={product} onClose={closeModal} />}
         </div>
     );
 };
