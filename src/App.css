@@ -6,6 +6,10 @@
   height: 40vmin;
   pointer-events: none;
 }
+/* Основное содержимое страницы */
+.content {
+    padding-bottom: 80px; /* Увеличенный отступ снизу, чтобы меню не перекрывало содержимое */
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

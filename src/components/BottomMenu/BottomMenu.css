@@ -1,0 +1,48 @@
+/* Фиксированное нижнее меню */
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #fff; /* Белый фон меню */
+    display: flex;
+    justify-content: space-around; /* Равномерное распределение кнопок */
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень наверху */
+    z-index: 1000; /* Меню всегда сверху */
+}
+
+/* Стиль для кнопок в нижнем меню */
+.menu-btn {
+    background-color: #fff; /* Белый фон кнопок */
+    color: #333; /* Темный цвет текста */
+    border: none;
+    padding: 10px;
+    border-radius: 50%; /* Круглая форма кнопок */
+    font-size: 14px; /* Меньший размер текста */
+    width: 45px; /* Фиксированная ширина для округлой кнопки */
+    height: 45px; /* Фиксированная высота для округлой кнопки */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ховер эффект для кнопок */
+.menu-btn:hover {
+    background-color: #f0f0f0; /* Легкий серый фон при наведении */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+/* Активная кнопка */
+.menu-btn-active {
+    background-color: #e6e6e6; /* Более темный фон для активной кнопки */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Стиль для иконок внутри кнопок (если планируете использовать иконки) */
+.menu-btn-icon {
+    font-size: 18px;
+}
