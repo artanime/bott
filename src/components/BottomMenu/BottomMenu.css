@@ -24,10 +24,29 @@
     width: 45px; /* Фиксированная ширина для округлой кнопки */
     height: 45px; /* Фиксированная высота для округлой кнопки */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+/* Убираем подчеркивание для всех ссылок */
+.menu-btn:link, .menu-btn:visited {
+    text-decoration: none;
+}
+
+/* Стиль для иконок внутри кнопок */
+.menu-btn-icon {
+    font-size: 18px;
+}
+
+/* Стиль для подписей кнопок */
+.menu-btn-label {
+    font-size: 12px; /* Размер текста подписи */
+    margin-top: 5px; /* Отступ между иконкой и текстом */
+    color: #333;
 }
 
 /* Ховер эффект для кнопок */
@@ -40,9 +59,4 @@
 .menu-btn-active {
     background-color: #e6e6e6; /* Более темный фон для активной кнопки */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Стиль для иконок внутри кнопок (если планируете использовать иконки) */
-.menu-btn-icon {
-    font-size: 18px;
 }

@@ -1,25 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
-import Button from "../Button/Button";
-import { useTelegram } from "../../hooks/useTelegram";
 
 const Header = () => {
-    const { onClose } = useTelegram();
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Обработчик для переключения темы
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
+    // Эффект для установки темы при изменении isDarkMode
+    useEffect(() => {
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+        } else {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+        }
+    }, [isDarkMode]);
 
     return (
         <header className="header">
-            {/* Левая часть: Логотип и выбор языка */}
             <div className="header-left">
-                <img src="/Logo/logo.png" alt="App Logo" className="logo" /> {/* Логотип приложения */}
-                <select className="language-selector">
-                    <option value="ru">Русский</option>
-                    <option value="en">English</option>
-                    <option value="ua">Українська</option>
-                </select>
+                <img src="/Logo/logo.png" alt="App Logo" className="logo" />
             </div>
-            {/* Правая часть: Кнопка закрытия */}
             <div className="header-right">
-                <Button onClick={onClose} className="close-btn">Закрыть</Button>
+                <button onClick={toggleTheme} className="theme-switcher">
+                    {isDarkMode ? '🌙 Dark' : '☀️ Light'}
+                </button>
             </div>
         </header>
     );

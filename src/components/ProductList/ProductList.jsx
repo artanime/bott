@@ -8,8 +8,8 @@ const products = [
         id: '1',
         title: 'Attack on Titan',
         price: 1500,
-        image: 'Photo/attack.jpg',
-        media: ['Photo/attack.jpg', 'Photo/6.jpg', 'Photo/titan.mp4'] // Вставляем ссылки на видео и изображения
+        image: 'Images/attack.jpg',
+        media: ['Images/attack.jpg', 'Images/6.jpg', 'Images/titan.mp4'] // Вставляем ссылки на видео и изображения
     }
 ];
 

@@ -1,0 +1,47 @@
+.gallery-page {
+    padding: 20px;
+    padding-top: 80px; /* Добавляем отступ сверху для размещения кнопки под хедером */
+    text-align: left; /* Выровняем содержимое по левому краю */
+    position: relative;
+}
+
+.back-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+/* Ховер эффект для кнопки "Назад" */
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 40px; /* Отступ для содержимого */
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.1);
+}

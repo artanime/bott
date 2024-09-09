@@ -1,67 +1,59 @@
-/* Фиксированный хэдер */
+/* Основные стили хедера */
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 60px; /* Высота хедера */
-    background-color: #333;
-    color: #fff;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    box-sizing: border-box;
-    overflow: hidden;
+    padding: 0 20px;
+    background-color: var(--header-bg-color); /* Цвет фона хедера через переменную */
+    color: var(--header-text-color); /* Цвет текста хедера через переменную */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Логотип */
 .logo {
-    height: 40px; /* Фиксированная высота логотипа */
-    width: auto; /* Автоматическая ширина для сохранения пропорций */
+    height: 40px;
+    width: auto;
 }
 
-/* Основное содержимое страницы в контейнере */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+/* Кнопка для переключения темы */
+.theme-switcher {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+    color: var(--header-text-color);
+    transition: color 0.3s ease;
+}
+
+.theme-switcher:hover {
+    opacity: 0.8;
+}
+
+/* Светлая тема */
+body.light-mode {
+    --header-bg-color: #b3e5fc; /* Светло-синий цвет для светлой темы */
+    --header-text-color: #333;   /* Тёмный текст для светлой темы */
+    --body-bg-color: #f9f9f9;   /* Светлый фон страницы */
+    --body-text-color: #333;     /* Тёмный текст для страницы */
+    background-color: var(--body-bg-color);
+    color: var(--body-text-color);
+}
+
+/* Тёмная тема */
+body.dark-mode {
+    --header-bg-color: #1565c0; /* Тёмно-синий цвет для тёмной темы */
+    --header-text-color: #f0f0f0; /* Светлый текст для тёмной темы */
+    --body-bg-color: #181818;   /* Тёмный фон страницы */
+    --body-text-color: #f0f0f0; /* Светлый текст для страницы */
+    background-color: var(--body-bg-color);
+    color: var(--body-text-color);
+}
+
+/* Дополнительные стили для контента */
+.content {
     padding: 20px;
-    margin-top: 80px; /* Отступ для основного контента */
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Карточка с фотографией */
-.card {
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    border-radius: 8px;
-}
-
-.card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-/* Адаптивные стили для мобильных устройств */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        padding: 10px;
-    }
-
-    .container {
-        margin-top: 100px;
-        padding: 15px;
-    }
-
-    .logo {
-        height: 30px; /* Уменьшение размера логотипа на мобильных устройствах */
-    }
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
