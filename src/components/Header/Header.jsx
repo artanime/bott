@@ -1,13 +1,14 @@
 import React from 'react';
-import Button from "../Button/Button";
-import {useTelegram} from "../../hooks/useTelegram";
 import './Header.css';
+import Button from "../Button/Button";
+import { useTelegram } from "../../hooks/useTelegram";
 
 const Header = () => {
-    const {user, onClose} = useTelegram();
+    const { user, onClose } = useTelegram();
 
     return (
-        <div className="header">
+        <header className="header">
+            {/* Левая часть: Логотип и выбор языка */}
             <div className="header-left">
                 <img src="/Logo/logo.png" alt="App Logo" className="logo" /> {/* Логотип приложения */}
                 <select className="language-selector">
@@ -16,10 +17,11 @@ const Header = () => {
                     <option value="ua">Українська</option>
                 </select>
             </div>
+            {/* Правая часть: Кнопка закрытия */}
             <div className="header-right">
-                <Button onClick={onClose}>Закрыть</Button>
+                <Button onClick={onClose} className="close-btn">Закрыть</Button>
             </div>
-        </div>
+        </header>
     );
 };
 

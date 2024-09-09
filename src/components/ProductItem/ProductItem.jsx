@@ -1,11 +1,21 @@
-import React from 'react';
-import './ProductItem.css';
+import React, { useState } from 'react';
 import Button from "../Button/Button";
+import './ProductItem.css';
+import ProductModal from '../ProductModal/ProductModal'; // Импортируем модальное окно
 
 const ProductItem = ({ product, className, onAdd }) => {
+    const [isModalOpen, setModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
 
     const onAddHandler = () => {
         onAdd(product);
+    }
+
+    const openModal = () => {
+        setModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setModalOpen(false);
     }
 
     return (
@@ -16,11 +26,14 @@ const ProductItem = ({ product, className, onAdd }) => {
             <div className="title">{product.title}</div>
             <div className="description">{product.description}</div>
             <div className="price">
-                <span>Стоимость: <b>{product.price}</b></span>
+                <span>Стоимость: <b>{product.price}₽</b></span>
             </div>
-            <Button className="add-btn" onClick={onAddHandler}>
-                Добавить в корзину
+            <Button className="add-btn" onClick={openModal}>
+                Look
             </Button>
+
+            {/* Модальное окно с галереей */}
+            {isModalOpen && <ProductModal product={product} onClose={closeModal} />}
         </div>
     );
 };

@@ -1,79 +1,27 @@
-.product-list {
-
-    max-width: 100%;
-    padding: 0;
-}
-
-
-.banner-slider {
-    width: 100%;
-    margin-bottom: 0;
-    position: relative;
-
-
-}
-
-.video-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
-    overflow: hidden;
-
-     /* Ограничение максимальной ширины */
-}
-
-.banner-video {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
 .list {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    flex-wrap: wrap; /* Карточки будут оборачиваться на новую строку */
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.total {
     width: 100%;
-    height: 100%;
+    text-align: right;
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
-.item {
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .list {
+        flex-direction: column; /* На мобильных устройствах карточки будут отображаться по одной колонке */
+        gap: 10px;
+    }
 
-    margin-bottom: 10px;
-}
-
-
-
-
-
-
-
-/* Основной контейнер страницы */
-.product-list {
-    /*overflow-x: hidden; !* Отключаем горизонтальный скроллинг *!*/
-    box-sizing: border-box; /* Учитываем бордеры и паддинги в ширине */
-    padding-bottom: 63px;
-}
-
-/* Баннер и другие медиа элементы */
-.banner-slider,
-.video-container,
-.banner-video {
-    max-width: 100%; /* Ограничиваем ширину */
-    overflow: hidden; /* Отключаем переполнение */
-    box-sizing: border-box;
-}
-
-/* Убедитесь, что все элементы, которые могут выходить за пределы экрана, ограничены по ширине */
-.list,
-.item,
-.nav-bar,
-.nav-button {
-    max-width: 100%;
-    box-sizing: border-box;
+    .total {
+        text-align: center; /* Выровнять общую сумму по центру */
+        font-size: 18px;
+    }
 }
