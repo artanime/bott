@@ -1,7 +1,25 @@
 .gallery-page {
     padding: 20px;
+    padding-top: 80px; /* Уменьшенный отступ сверху для галереи */
+    padding-bottom: 100px; /* Отступ снизу для нижнего меню */
     text-align: center;
 }
+
+/* Респонсивные стили */
+@media (max-width: 768px) {
+    .gallery-page {
+        padding-top: 60px; /* Ещё меньше отступ для мобильных устройств */
+        padding-bottom: 120px; /* Увеличенный отступ снизу для мобильных устройств */
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-page {
+        padding-top: 50px; /* Минимальный отступ для маленьких экранов */
+        padding-bottom: 140px; /* Дополнительный отступ снизу для маленьких экранов */
+    }
+}
+
 
 /* Заголовки */
 h2 {

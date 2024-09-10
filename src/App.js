@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useLocation } from 'react-router-dom'; // Импортируем useLocation
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from "./components/Header/Header";
 import ProductList from "./components/ProductList/ProductList";
 import Form from "./components/Form/Form";

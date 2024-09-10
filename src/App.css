@@ -1,11 +1,25 @@
 .App {
+    background-color: transparent; /* Проверяем, чтобы фон не был задан здесь */
     text-align: center;
 }
 
 .content {
-    padding-top: 100px; /* Отступ для хедера */
-    margin-left: 100px; /* Уменьшенный отступ слева для контента */
+    padding-top: 100px; /* Уменьшаем отступ между хедером и основной информацией */
 }
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .content {
+        padding-top: 80px; /* Уменьшенный отступ для мобильных */
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding-top: 70px; /* Ещё меньше для очень маленьких экранов */
+    }
+}
+
 
 .header {
     position: fixed;
@@ -17,7 +31,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Контентная сетка для карточек */
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -25,14 +38,4 @@
     padding: 20px;
 }
 
-@media (max-width: 768px) {
-    .content {
-        margin-left: 80px; /* Уменьшение отступа слева для мобильных */
-    }
-}
 
-@media (max-width: 480px) {
-    .content {
-        margin-left: 70px; /* Еще меньший отступ для маленьких экранов */
-    }
-}
