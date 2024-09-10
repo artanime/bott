@@ -22,6 +22,16 @@ function App() {
         setBagItems((prevItems) => [...prevItems, product]);
     };
 
+    // Функция для удаления одного экземпляра товара из корзины
+    const removeFromBag = (productId) => {
+        const index = bagItems.findIndex(item => item.id === productId);
+        if (index !== -1) {
+            const newItems = [...bagItems];
+            newItems.splice(index, 1); // Удаляем только один экземпляр
+            setBagItems(newItems);
+        }
+    };
+
     return (
         <div className="App">
             <Header />
@@ -30,7 +40,7 @@ function App() {
                     <Route index element={<ProductList addToBag={addToBag} />} /> {/* Передаем функцию добавления в корзину */}
                     <Route path={'form'} element={<Form />} />
                     <Route path={'gallery/:id'} element={<Gallery />} /> {/* Маршрут для галереи */}
-                    <Route path={'bag'} element={<Bag bagItems={bagItems} />} /> {/* Маршрут для корзины */}
+                    <Route path={'bag'} element={<Bag bagItems={bagItems} removeFromBag={removeFromBag} />} /> {/* Передаем функцию удаления */}
                 </Routes>
             </div>
             <BottomMenu bagItems={bagItems} /> {/* Передаем товары в корзину для отображения количества */}

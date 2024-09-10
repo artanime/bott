@@ -1,16 +1,28 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './BagItem.css';
 
-const BagItem = ({ product }) => {
+const BagItem = ({ product, onRemove }) => {
+    const navigate = useNavigate();
+
+    // Переход на детальную страницу товара
+    const handleCardClick = () => {
+        navigate(`/gallery/${product.id}`);
+    };
+
     return (
-        <div className="bag-item">
-            <div className="bag-item-img">
-                <img src={product.image} alt={product.title} />
+        <div className="bag-item" onClick={handleCardClick}>
+            <img src={product.image} alt={product.title} className="bag-item-image" />
+            <div className="bag-item-info">
+                <h3>{product.title}</h3>
+                <p>Price: ${product.price}</p>
             </div>
-            <div className="bag-item-details">
-                <h3 className="bag-item-title">{product.title}</h3>
-                <p className="bag-item-price">${product.price}</p>
-            </div>
+            <button className="remove-btn" onClick={(e) => {
+                e.stopPropagation(); // Останавливаем всплытие, чтобы карточка не открывалась при удалении
+                onRemove();
+            }}>
+                Remove
+            </button>
         </div>
     );
 };

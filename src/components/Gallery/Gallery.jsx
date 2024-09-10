@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Используем useNavigate для кнопки "Назад"
 import './Gallery.css';
 
@@ -9,7 +9,7 @@ const products = [
             { type: 'image', src: '/images/6.jpg' },
             { type: 'image', src: '/images/5.jpg' },
             { type: 'image', src: '/images/4.1.jpg' },
-            { type: 'video', src: '/videos/sample.mp4', poster: '/images/video-preview.jpg' }
+            { type: 'video', src: '/images/titan.mp4', poster: '/images/222.jpg', title: 'Titan Battle' } // Добавляем название видео
         ]
     },
 ];
@@ -20,9 +20,8 @@ const Gallery = () => {
     const product = products.find(p => p.id === id);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
-    const [startX, setStartX] = useState(null);
+    const videoRef = useRef(null); // Используем реф для видео
 
-    // Функции для листания медиа
     const prevMedia = useCallback(() => {
         if (product?.media) {
             setCurrentMediaIndex((prevIndex) =>
@@ -46,44 +45,20 @@ const Gallery = () => {
 
     const closeFullscreen = () => {
         setIsFullscreen(false);
-    };
-
-    const handleTouchStart = (event) => {
-        setStartX(event.touches[0].clientX);
-    };
-
-    const handleTouchMove = (event) => {
-        if (!startX) return;
-        const currentX = event.touches[0].clientX;
-        const diffX = startX - currentX;
-
-        if (diffX > 50) {
-            nextMedia();
-            setStartX(null);
-        } else if (diffX < -50) {
-            prevMedia();
-            setStartX(null);
+        if (videoRef.current) {
+            videoRef.current.pause(); // Останавливаем видео при закрытии
         }
     };
 
-    const handleClick = (event) => {
-        const screenWidth = window.innerWidth;
-        const clickX = event.clientX;
-
-        if (clickX > screenWidth * 0.9) {
-            nextMedia();
-        } else if (clickX < screenWidth * 0.1) {
-            prevMedia();
-        } else if (event.target.className === 'fullscreen-backdrop') {
-            closeFullscreen();
+    useEffect(() => {
+        if (!isFullscreen && videoRef.current) {
+            videoRef.current.pause(); // Останавливаем видео, если полноэкранный режим закрыт
         }
-    };
+    }, [isFullscreen]);
 
-    // Разделяем изображения и видео для показа в разных контейнерах
     const images = product?.media.filter(item => item.type === 'image');
     const videos = product?.media.filter(item => item.type === 'video');
 
-    // Если продукт не найден, возвращаем сообщение
     if (!product) {
         return <div>Product not found</div>;
     }
@@ -112,18 +87,26 @@ const Gallery = () => {
                 ))}
             </div>
 
-            {/* Галерея видео */}
+            {/* Галерея видео в формате карточки */}
             <h2>Media Gallery</h2>
             <div className="media-gallery-grid">
                 {videos.map((video, index) => (
-                    <div key={index + images.length} className="media-item">
-                        <video
-                            src={video.src}
-                            className="gallery-video"
-                            poster={video.poster} /* Добавляем постер для видео */
-                            controls
-                            onClick={() => openFullscreen(index + images.length)}
-                        />
+                    <div key={index + images.length} className="media-card">
+                        <div className="video-card">
+                            <div className="video-poster">
+                                <img
+                                    src={video.poster}
+                                    alt={`Poster of ${video.title}`}
+                                    className="video-poster-img"
+                                />
+                            </div>
+                            <div className="video-content">
+                                <h3>{video.title}</h3>
+                                <button className="play-button" onClick={() => openFullscreen(index + images.length)}>
+                                    ▶ Play
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
@@ -132,11 +115,9 @@ const Gallery = () => {
             {isFullscreen && (
                 <div
                     className="fullscreen-backdrop"
-                    onClick={handleClick}
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
+                    onClick={closeFullscreen}
                 >
-                    <div className="fullscreen-content">
+                    <div className="fullscreen-content-youtube">
                         <button className="close-btn" onClick={closeFullscreen}>
                             ✖
                         </button>
@@ -149,8 +130,9 @@ const Gallery = () => {
                             />
                         ) : (
                             <video
-                                src={product.media[currentMediaIndex].src}
-                                className="fullscreen-video"
+                                ref={videoRef} // Добавляем реф для управления видео
+                                src={process.env.PUBLIC_URL + product.media[currentMediaIndex].src}
+                                className="fullscreen-video-youtube"
                                 controls
                                 autoPlay
                             />

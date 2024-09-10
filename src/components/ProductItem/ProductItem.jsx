@@ -12,7 +12,7 @@ const ProductItem = ({ product, className, onAdd }) => {
     };
 
     const onAddHandler = (e) => {
-        e.stopPropagation(); // Останавливаем событие, чтобы не сработало открытие галереи
+        e.stopPropagation(); // Останавливаем всплытие события, чтобы карточка не открывалась
         onAdd(product); // Добавляем товар в корзину
     };
 
@@ -27,8 +27,8 @@ const ProductItem = ({ product, className, onAdd }) => {
                 <div className="price">
                     <span>Price: <b>${product.price}</b></span>
                 </div>
-                <Button className="add-btn" onClick={onAddHandler}>
-                    Look
+                <Button className="add-btn" onClick={onAddHandler}> {/* Кнопка только для добавления в корзину */}
+                    Put in Bag
                 </Button>
             </div>
         </div>
