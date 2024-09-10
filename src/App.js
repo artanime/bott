@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom'; // Импортируем useLocation
 import Header from "./components/Header/Header";
 import ProductList from "./components/ProductList/ProductList";
 import Form from "./components/Form/Form";
@@ -14,6 +14,7 @@ function App() {
     const { tg } = useTelegram();
     const [bagItems, setBagItems] = useState([]); // Состояние для корзины
     const [selectedCategory, setSelectedCategory] = useState(''); // Состояние для выбранной категории
+    const location = useLocation(); // Получаем текущий маршрут
 
     useEffect(() => {
         tg.ready();
@@ -42,10 +43,15 @@ function App() {
     return (
         <div className="App">
             <Header />
-            <Filters
-                selectedCategory={selectedCategory}
-                onSelectCategory={handleSelectCategory}
-            />
+
+            {/* Фильтры отображаются только на главной странице */}
+            {location.pathname === '/' && (
+                <Filters
+                    selectedCategory={selectedCategory}
+                    onSelectCategory={handleSelectCategory}
+                />
+            )}
+
             <div className="content">
                 <Routes>
                     <Route
@@ -62,6 +68,7 @@ function App() {
                     <Route path={'bag'} element={<Bag bagItems={bagItems} removeFromBag={removeFromBag} />} />
                 </Routes>
             </div>
+
             <BottomMenu bagItems={bagItems} />
         </div>
     );

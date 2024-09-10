@@ -1,22 +1,24 @@
+/* Общие стили */
 .filters-container {
     position: fixed;
-    top: 100px; /* Положение под хедером */
-    left: 20px; /* Размещение слева */
+    top: 100px; /* Начало под хедером */
+    left: 20px; /* Фиксируем слева */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px; /* Расстояние между фильтрами */
     padding: 10px;
     z-index: 100;
 }
 
+/* Стиль для каждой кнопки фильтра */
 .filter-button {
     background-color: #fff;
     border: 2px solid #007bff;
     color: #007bff;
-    padding: 15px;
+    padding: 12px; /* Уменьшили размер кнопки */
     border-radius: 50%; /* Круглая форма */
-    width: 70px;
-    height: 70px;
+    width: 55px; /* Уменьшили размер ширины */
+    height: 55px; /* Уменьшили размер высоты */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,23 +30,72 @@
     text-align: center;
 }
 
+/* Изменения при наведении */
 .filter-button:hover {
     background-color: #007bff;
     color: #fff;
-    transform: translateY(-5px);
+    transform: translateY(-3px); /* Уменьшили эффект при наведении */
 }
 
+/* Активная кнопка фильтра */
 .filter-button.active {
     background-color: #0056b3;
     color: #fff;
     border-color: #0056b3;
 }
 
+/* Иконки в фильтрах */
 .filter-icon {
-    font-size: 24px; /* Размер иконки */
+    font-size: 20px; /* Уменьшили размер иконки */
 }
 
+/* Название категории в фильтрах */
 .filter-name {
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 10px; /* Уменьшили размер текста */
+    margin-top: 3px;
+}
+
+/* Респонсивный дизайн для маленьких экранов */
+@media (max-width: 768px) {
+    .filters-container {
+        top: 80px; /* Уменьшили отступ сверху для мобильных */
+        left: 10px; /* Уменьшили отступ слева для мобильных */
+        gap: 10px; /* Уменьшили расстояние между фильтрами */
+    }
+
+    .filter-button {
+        width: 50px; /* Еще меньше для мобильных устройств */
+        height: 50px;
+        padding: 10px;
+    }
+
+    .filter-icon {
+        font-size: 18px; /* Уменьшили размер иконки для мобильных */
+    }
+
+    .filter-name {
+        font-size: 9px; /* Уменьшили размер текста для мобильных */
+    }
+}
+
+/* Дополнительные изменения для очень маленьких экранов (например, телефонов с небольшой диагональю) */
+@media (max-width: 480px) {
+    .filters-container {
+        top: 70px; /* Еще меньше отступ для очень маленьких устройств */
+        left: 5px; /* Уменьшили отступ слева */
+    }
+
+    .filter-button {
+        width: 45px;
+        height: 45px;
+        padding: 8px;
+    }
+
+    .filter-icon {
+        font-size: 16px; /* Уменьшили размер иконки */
+    }
+
+    .filter-name {
+        font-size: 8px;
+    }
 }

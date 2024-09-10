@@ -4,7 +4,7 @@
 
 .content {
     padding-top: 100px; /* Отступ для хедера */
-    margin-left: 120px; /* Отступ слева для фильтров */
+    margin-left: 100px; /* Уменьшенный отступ слева для контента */
 }
 
 .header {
@@ -17,9 +17,22 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Контентная сетка для карточек */
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        margin-left: 80px; /* Уменьшение отступа слева для мобильных */
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        margin-left: 70px; /* Еще меньший отступ для маленьких экранов */
+    }
 }
