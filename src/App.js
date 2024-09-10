@@ -6,12 +6,14 @@ import Form from "./components/Form/Form";
 import Gallery from './components/Gallery/Gallery';
 import Bag from './components/Bag/Bag'; // Импортируем компонент корзины
 import BottomMenu from './components/BottomMenu/BottomMenu';
+import Filters from './components/Filters/Filters'; // Импортируем фильтры
 import './App.css';
 import { useTelegram } from "./hooks/useTelegram";
 
 function App() {
     const { tg } = useTelegram();
     const [bagItems, setBagItems] = useState([]); // Состояние для корзины
+    const [selectedCategory, setSelectedCategory] = useState(''); // Состояние для выбранной категории
 
     useEffect(() => {
         tg.ready();
@@ -32,18 +34,35 @@ function App() {
         }
     };
 
+    // Обработчик выбора категории
+    const handleSelectCategory = (category) => {
+        setSelectedCategory(category);
+    };
+
     return (
         <div className="App">
             <Header />
+            <Filters
+                selectedCategory={selectedCategory}
+                onSelectCategory={handleSelectCategory}
+            />
             <div className="content">
                 <Routes>
-                    <Route index element={<ProductList addToBag={addToBag} />} /> {/* Передаем функцию добавления в корзину */}
+                    <Route
+                        index
+                        element={
+                            <ProductList
+                                addToBag={addToBag}
+                                selectedCategory={selectedCategory} // Передаем выбранную категорию
+                            />
+                        }
+                    />
                     <Route path={'form'} element={<Form />} />
-                    <Route path={'gallery/:id'} element={<Gallery />} /> {/* Маршрут для галереи */}
-                    <Route path={'bag'} element={<Bag bagItems={bagItems} removeFromBag={removeFromBag} />} /> {/* Передаем функцию удаления */}
+                    <Route path={'gallery/:id'} element={<Gallery />} />
+                    <Route path={'bag'} element={<Bag bagItems={bagItems} removeFromBag={removeFromBag} />} />
                 </Routes>
             </div>
-            <BottomMenu bagItems={bagItems} /> {/* Передаем товары в корзину для отображения количества */}
+            <BottomMenu bagItems={bagItems} />
         </div>
     );
 }
